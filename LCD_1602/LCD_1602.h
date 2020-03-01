@@ -5,7 +5,15 @@
  *  Author: Serhii Senyk
  */ 
 
+/*
+	Atmega 2560:
+	data ports: PORTF (PF0 - PF7)
+	command ports: PORTB (PB0 - PB3)
+		RS - PB0
+		RW - PB1
+		E  - PB2
 
+*/
 #ifndef LCD_1602_H_
 #define LCD_1602_H_
 #define F_CPU 16000000UL
@@ -15,12 +23,11 @@
 #define RS 0
 #define RW 1
 #define E  2
-#define DATA_DDR DDRF
-#define DATA_PORT PORTF
-#define DATA_PIN PINF
-#define COMMAND_DDR DDRB
-#define COMMAND_PORT PORTB
-#define SIZE_DATA 8
+#define DDR_DATA DDRF
+#define PORT_DATA PORTF
+#define PIN_DATA PINF
+#define DDR_COMMAND DDRB
+#define PORT_COMMAND PORTB
 #define HIGH(port, pin) ((port) |= (1 << (pin)))
 #define LOW(port, pin) ((port) &= ~(1 << (pin)))
 #define DELAY_COM_US 0.20
