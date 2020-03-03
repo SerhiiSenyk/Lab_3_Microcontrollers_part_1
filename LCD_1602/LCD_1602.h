@@ -19,6 +19,8 @@
 #define F_CPU 16000000UL
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/pgmspace.h>
+
 
 #define RS 0
 #define RW 1
@@ -26,8 +28,8 @@
 #define DDR_DATA DDRF
 #define PORT_DATA PORTF
 #define PIN_DATA PINF
-#define DDR_COMMAND DDRB
-#define PORT_COMMAND PORTB
+#define DDR_CONTROL DDRB
+#define PORT_CONTROL PORTB
 #define HIGH(port, pin) ((port) |= (1 << (pin)))
 #define LOW(port, pin) ((port) &= ~(1 << (pin)))
 #define DELAY_COM_US 0.20
@@ -35,9 +37,14 @@
 
 void LCD_Settup();
 void LCD_PollBusyFlag();
+void LCD_clear();
 void LCD_WriteCommand(uint8_t command);
 void LCD_writeSymbol(uint8_t symbol);
 void LCD_GotoYX(uint8_t Y, uint8_t X);
 void LCD_WriteStr(volatile char *str);
+void LCD_WriteStrPROGMEM(volatile char *str);
+void LCD_EnabledCursor();
+void LCD_DisabledCursor();
+void LCD_clearRow();
 
 #endif /* LCD_1602_H_ */
