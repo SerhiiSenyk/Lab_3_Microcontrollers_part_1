@@ -14,6 +14,7 @@
 #define PORT_KEYPAD PORTK
 #define PIN_KEYPAD  PINK
 
+
 #define KEY_1 0xEE
 #define KEY_2 0xDE
 #define KEY_3 0xBE
@@ -33,6 +34,15 @@
 #define KEY_0 0xD7
 #define KEY_E 0xB7
 #define KEY_D 0x77
+
+#define HIGH(port, pin) ((port) |= (1 << (pin)))
+#define LOW(port, pin) ((port) &= ~(1 << (pin)))
+
+#define DDR_BUZZER DDRB
+#define PORT_BUZZER PORTB
+#define BUZZER 3
+#define BEEP_SHORT_MS 100
+#define BEEP_LONG_MS 500L
 
 void SetupKeyPad();
 uint8_t isButtonPressed();

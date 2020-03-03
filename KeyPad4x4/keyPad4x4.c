@@ -6,15 +6,16 @@
  */ 
 #include "keypad4x4.h"
 
-uint8_t wasPressed = 0;
-uint8_t isPressed = 0;
-uint8_t logicPressed = 0;
+volatile uint8_t wasPressed = 0;
+volatile uint8_t isPressed = 0;
+volatile uint8_t logicPressed = 0;
 char pressedButton;
 
 void SetupKeyPad()
 {
 	DDR_KEYPAD = 0x0F;
 	PORT_KEYPAD = 0xF0;
+	HIGH(DDR_BUZZER, BUZZER); 
 }
 
 char readKeyFromPad4x4() {
@@ -52,6 +53,7 @@ uint8_t isButtonPressed()
 			}
 			if(isPressed)
 			{
+				
 				switch(PIN_KEYPAD){
 					case KEY_1: pressedButton = '1'; break;
 					case KEY_2: pressedButton = '2'; break;
@@ -72,12 +74,14 @@ uint8_t isButtonPressed()
 					default:break;	
 				}
 				logicPressed = 1;
+				
 			}
 			PORT_KEYPAD = 0xF0;
-		}	
+		}
+		
 	}
 	else if(PIN_KEYPAD == 0xF0){
-		_delay_ms(200);
+		_delay_ms(100);
 		wasPressed = 0;
 	}
 	return logicPressed;
